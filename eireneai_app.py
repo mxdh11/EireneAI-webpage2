@@ -3,7 +3,13 @@ from transformers import pipeline
 import requests
 
 # Load emotion detection model
-emotion_classifier = pipeline("text-classification", model="bhadresh-savani/distilbert-base-uncased-emotion")
+def mock_emotion_classifier(text):
+    if "sad" in text.lower():
+        return [{"label": "sadness", "score": 0.98}]
+    elif "angry" in text.lower():
+        return [{"label": "anger", "score": 0.95}]
+    else:
+        return [{"label": "joy", "score": 0.90}]
 
 # LibreTranslate API function
 def translate_text(text, target_lang="ar"):
